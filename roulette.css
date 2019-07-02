@@ -1,0 +1,25 @@
+table {
+    border: solid 5px;
+    border-collapse: collapse;
+}
+
+td {
+    height: 80px;
+    width: 80px;
+    font-size: 30px;
+    text-align: center;
+    line-height: center;
+    border: solid 2px;
+}
+
+.run {
+    background-color: #FF9999;
+}
+
+.stop {
+    background-color: #ff0000;
+}
+
+.used {
+    background-color: #999999;
+}

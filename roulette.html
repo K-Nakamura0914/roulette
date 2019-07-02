@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ルーレット</title>
+    <link rel="stylesheet" href="roulette.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        $(function(){
+            var interval_id;
+
+            $('#stop').prop('disabled', true);
+            $('#reset').prop('disabled', true);
+
+            $('#start').click(function start_roulette(){
+                $('#start').prop('disabled', true);
+                $('#stop').prop('disabled', false);
+                $('#reset').prop('disabled', false);
+                $('.stop').removeClass('stop').addClass('used');
+                interval_id = setInterval(spin_roulette, 50);
+            });
+
+            function spin_roulette(){
+                $('.run').removeClass('run');
+                var num = $('td').not('.used').length;
+                var rand = Math.floor(Math.random() * num);
+                $('td').not('.used').eq(rand).addClass('run');
+console.log('run', num, rand);
+            }
+
+            $('#stop').click(function stop_roulette(){
+                clearInterval(interval_id);
+                $('.run').removeClass('run').addClass('stop');
+                var num = $('td').not('.used').length;
+                if (num > 1) {
+                    $('#start').prop('disabled', false);
+                }
+                $('#stop').prop('disabled', true);
+            });
+
+            $('#reset').click(function reset_roulette(){
+                clearInterval(interval_id);
+                $('td').removeClass('run stop used');
+                $('#start').prop('disabled', false);
+                $('#stop').prop('disabled', true);
+                $('#reset').prop('disabled', true);
+            });
+        });
+    </script>
+</head>
+<body>
+    <table id="table">
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+            <td>16</td>
+        </tr>
+    </table>
+    <button id="start">スタート</button>
+    <button id="stop">ストップ</button>
+    <button id="reset">リセット</button>
+</body>
+</html>
